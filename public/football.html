@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YoSinTV - Football</title>
+<meta name="description" content="Live football matches, latest articles and schedules on YoSinTV." />
+<link rel="icon" href="https://web.cricfoot.net/favico.png" />
+<link rel="stylesheet" href="/home.css" />
+<style>
+.match-card{display:block;border-radius:var(--r);border:1px solid var(--border);padding:14px;margin:12px 0;background:var(--card);box-shadow:var(--s1)}
+.match-row-teams{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.match-team{flex:1;display:flex;align-items:center;gap:8px;min-width:0}
+.match-team.home{justify-content:flex-end}
+.match-team.away{justify-content:flex-start}
+.match-team img{width:40px;height:40px;object-fit:cover}
+.match-team-name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.match-team.home .match-team-name{text-align:right;order:-1}
+.match-center{min-width:90px;text-align:center}
+.match-local-time{font-size:.85rem;color:var(--muted);margin:0 0 4px}
+.match-status{font-size:.72rem;font-weight:700;padding:4px 8px;border-radius:999px;display:inline-block;min-width:60px}
+.match-status-countdown{background:var(--green);color:#fff}
+.match-status-live{background:#ef4444;color:#fff}
+.match-status-over{background:#6b7280;color:#fff}
+.match-league-bar{margin-top:6px;padding:6px 12px;background:rgba(29,78,216,.1);border-radius:8px;text-align:center}
+.match-league-bar p{margin:0;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--blue)}
+.pc{margin-bottom:12px}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5525538810839147" crossorigin="anonymous"></script>
+</head>
+<body>
+<header id="yst-hdr">
+  <div class="hdr-in">
+    <a class="logo" href="/">
+      <img alt="YoSinTV" src="https://web.cricfoot.net/logo.png" />
+      <span class="logo-fallback">YoSinTV</span>
+    </a>
+    <div class="hdr-r">
+      <div class="search-form">
+        <div class="sw">
+          <span aria-hidden="true" class="sic">⌕</span>
+          <input class="si" id="yst-s" placeholder="Search articles..." type="text" value="" />
+        </div>
+      </div>
+      <label class="tgl" title="Dark Mode"><input id="yst-dm" type="checkbox" /><span class="sldr"></span></label>
+    </div>
+  </div>
+</header>
+
+<nav class="yst-nav">
+  <div class="nav-in">
+    <a class="nl" href="/">Home</a>
+    <a class="nl active" href="/cricket.html">Cricket</a>
+    <a class="nl" href="/football.html">Football</a>
+    <a class="nl" href="/?filter=Playing%20XI">Playing XI</a>
+    <a class="nl" href="/?filter=Match%20Preview">Preview</a>
+    <a class="nl" href="/?filter=T20%20World%20Cup">T20 WC 2026</a>
+    <a class="nl" href="https://www.cricfoot.net/?ads=yosintv.net" rel="noreferrer" target="_blank">Highlights</a>
+    <a class="nl" href="https://t.me/yosintvlive" rel="noreferrer" target="_blank">Telegram</a>
+  </div>
+</nav>
+
+<div class="adbar"><div class="ad-shell"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5525538810839147" data-ad-slot="4345862479" data-ad-format="auto" data-full-width-responsive="true"></ins></div></div>
+
+<main class="yst-wrap">
+  <div class="yst-content">
+    <div class="sh"><h2 class="sh-t">Upcoming Football Matches</h2><div class="sh-l"></div><span class="sh-b">Live</span></div>
+    <div id="match-list"></div>
+
+    <div class="sh spaced-top"><h2 class="sh-t">Latest Articles</h2><div class="sh-l"></div></div>
+    <div id="latest-articles"></div>
+  </div>
+
+  <aside class="yst-aside">
+    <div class="wgt">
+      <div class="wgt-h">Recent Posts</div>
+      <div class="wgt-b recent-list" id="recent-posts"></div>
+    </div>
+    <div class="ad-shell sidebar-ad"><div class="ad-label">Advertisement</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5525538810839147" data-ad-slot="4345862479" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+  </aside>
+</main>
+
+<div class="page-shell"><div class="dmca"><div class="dmca-h">YoSinTV - DMCA Notice</div><p>YoSinTV does not host any media content on its own servers. Visitors may use external or third-party services to view content.</p></div></div>
+<div class="bottom-ad page-shell"><div class="ad-shell"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5525538810839147" data-ad-slot="4345862479" data-ad-format="auto" data-full-width-responsive="true"></ins></div></div>
+
+<footer class="yst-ft">
+  <div class="ft-in">
+    <div class="ft-grid">
+      <div>
+        <img alt="YoSinTV" class="footer-logo" src="https://web.cricfoot.net/logo.png" />
+        <p class="footer-copy">YoSinTV is sports website that covers all the Cricket Matches, World Cup, International/Domestic Matches, Football Matches, etc. </p>
+      </div>
+      <div>
+        <div class="ft-ht">Cricket</div>
+        <ul class="ft-ul">
+          <li><a href="/cricket.html">All Cricket</a></li>
+          <li><a href="/?filter=T20%20World%20Cup">T20 World Cup 2026</a></li>
+          <li><a href="/?filter=Playing%20XI">Playing XI</a></li>
+          <li><a href="https://yosintv.getemoji.online/cricket.html" rel="noreferrer" target="_blank">Live Cricket</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-ht">Football</div>
+        <ul class="ft-ul">
+          <li><a href="/football.html">All Football</a></li>
+          <li><a href="/?filter=Match%20Preview">Match Previews</a></li>
+          <li><a href="/">Premier League</a></li>
+          <li><a href="/">Champions League</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-ht">Pages</div>
+        <ul class="ft-ul">
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
+          <li><a href="/dmca">DMCA</a></li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot"><p>© 2026 <a href="/">YoSinTV</a>. All rights reserved. <a href="/privacy-policy">Privacy</a> · <a href="/disclaimer">Disclaimer</a> · <a href="/dmca">DMCA</a></p></div>
+  </div>
+</footer>
+
+<script>
+const API_URL='https://yosintv-api.pages.dev/api/footballl.json';
+const ARTICLE_URL_CANDIDATES=['/articles-data.json'];
+const SITE_DATA_URL='/site-data.json';
+let allMatches=[], timer;
+let allArticles=[];
+
+const dm=document.getElementById('yst-dm');
+const searchInput=document.getElementById('yst-s');
+if(localStorage.getItem('ystDm')==='true'){document.body.classList.add('dk');dm.checked=true}
+dm.addEventListener('change',()=>{document.body.classList.toggle('dk',dm.checked);localStorage.setItem('ystDm',String(dm.checked));});
+
+function pushAds(){try{(adsbygoogle=window.adsbygoogle||[]).push({});(adsbygoogle=window.adsbygoogle||[]).push({});(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){console.error(e)}}
+function fmtTime(v){const d=new Date(v);if(isNaN(d))return 'Time TBD';return new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit',hour12:true}).format(d)}
+function tick(){const now=Date.now();document.querySelectorAll('.match-status').forEach(el=>{const st=new Date(el.dataset.time).getTime();const end=st+(parseInt(el.dataset.duration||'2',10)*3600000);if(now>=end){el.textContent='END';el.className='match-status match-status-over'}else if(now>=st){el.textContent='LIVE';el.className='match-status match-status-live'}else{const diff=st-now;const h=Math.floor(diff/3600000);const m=Math.floor((diff%3600000)/60000);el.textContent=h>0?`${h}h ${m}m`:`${m}m`;el.className='match-status match-status-countdown'}})}
+function card(m){const t1=m.team1||'Home Team',t2=m.team2||'Away Team',p='https://placehold.co/48x48/ccc/333?text=L',l=m.displayLeague||m.competition||m.league||'';const a=document.createElement('a');a.href=m.details_url||'#';a.target='_blank';a.className='match-card';a.innerHTML=`<div class='match-row-teams'><div class='match-team home'><p class='match-team-name'>${t1}</p><img src='${m.team1_logo||p}' alt='${t1}' onerror="this.src='${p}'"></div><div class='match-center'><p class='match-local-time'>${fmtTime(m.start||m.match_time)}</p><p class='match-status' data-time='${m.start||m.match_time}' data-duration='${m.duration||2}'>...</p></div><div class='match-team away'><img src='${m.team2_logo||p}' alt='${t2}' onerror="this.src='${p}'"><p class='match-team-name'>${t2}</p></div></div>${l?`<div class='match-league-bar'><p>${l}</p></div>`:''}`;return a}
+function sortMatches(arr){const now=Date.now(),out=[];arr.forEach(m=>{const isTest=m.repeat==='5',repeatDays=isTest?5:1,base=new Date(m.start||m.match_time).getTime(),dur=parseInt(m.duration||'',10)||(isTest?8:6);for(let i=0;i<repeatDays;i++){const st=base+i*86400000,en=st+dur*3600000;if(isTest&&now>en)continue;const x={...m,start:new Date(st).toISOString(),displayLeague:isTest?`${m.competition||m.league||''} (Day ${i+1})`:(m.competition||m.league||'')};x.sortPriority=now>=st&&now<en?1:now<st?2:3;x.sortValue=st;out.push(x);if(isTest)break}});return out.sort((a,b)=>a.sortPriority!==b.sortPriority?a.sortPriority-b.sortPriority:a.sortValue-b.sortValue)}
+function slugify(value){return String(value||'').toLowerCase().trim().replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}
+function resolveArticleHref(article){
+  if(article.slug) return `/articles/${article.slug}/`;
+  if(article.url && article.url !== '#') return article.url;
+  const generated = slugify(article.title);
+  return generated ? `/articles/${generated}/` : '#';
+}
+function normalizeArticles(items){
+  return items.map((article)=>({
+    ...article,
+    href: resolveArticleHref(article),
+    date: article.date || article.publishedAt || '',
+  }));
+}
+function renderArticles(items){
+  const latest=document.getElementById('latest-articles');
+  const recent=document.getElementById('recent-posts');
+  latest.innerHTML='';recent.innerHTML='';
+  items.slice(0,5).forEach(a=>{
+    const c=document.createElement('article');
+    c.className='pc';
+    c.innerHTML=`<div class='pb'><div class='label-row'>${(a.labels||[]).slice(0,3).map(l=>`<span class='pl'>${l}</span>`).join('')}</div><a class='ptitle' href='${a.href}' target='${a.href.startsWith('http')?'_blank':'_self'}'>${a.title||''}</a><p class='psnip'>${a.snippet||''}</p><div class='pmeta'><span class='pmi'>${a.date||''}</span><span class='pmi'>${a.author||''}</span></div></div>`;
+    latest.appendChild(c);
+  });
+  items.slice(0,6).forEach(a=>{
+    const r=document.createElement('a');
+    r.className='rp-item';
+    r.href=a.href;
+    if(a.href.startsWith('http')){ r.target='_blank'; r.rel='noreferrer'; }
+    r.innerHTML=`<span class='rp-t'>${a.title||''}</span><span class='rp-d'>${a.date||''}</span>`;
+    recent.appendChild(r);
+  });
+}
+function filterArticles(){const q=searchInput.value.trim().toLowerCase();if(!q){renderArticles(allArticles);return;}renderArticles(allArticles.filter(a=>(a.title||'').toLowerCase().includes(q)||(a.snippet||'').toLowerCase().includes(q)))}
+searchInput.addEventListener('input',filterArticles);
+function renderArticlesFallback(message){
+  const latest=document.getElementById('latest-articles');
+  const recent=document.getElementById('recent-posts');
+  latest.innerHTML=`<p class="ev-loading">${message}</p>`;
+  recent.innerHTML=`<p class="ev-loading">${message}</p>`;
+}
+async function fetchArticlesFromCandidates(){
+  for(const url of ARTICLE_URL_CANDIDATES){
+    try{
+      const res=await fetch(url,{cache:'no-store'});
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data=await res.json();
+      const arr=Array.isArray(data)?data:(data.articles||[]);
+      if(Array.isArray(arr)&&arr.length) return normalizeArticles(arr);
+    }catch(error){
+      console.warn(`Article fetch failed for ${url}`,error);
+    }
+  }
+  return [];
+}
+
+async function applySiteLinks(){
+  try{
+    const res=await fetch(SITE_DATA_URL,{cache:'no-store'});
+    if(!res.ok) throw new Error('site-data fetch failed');
+    const site=await res.json();
+    const topLinks=Array.isArray(site.topNavLinks)?site.topNavLinks:[];
+    const footerGroups=Array.isArray(site.footerGroups)?site.footerGroups:[];
+
+    const navByLabel=new Map(topLinks.map((link)=>[link.label,link]));
+    document.querySelectorAll('.yst-nav .nl').forEach((anchor)=>{
+      const label=(anchor.textContent||'').trim();
+      const link=navByLabel.get(label);
+      if(!link) return;
+      anchor.href=link.href||'#';
+      if(link.external){anchor.target='_blank';anchor.rel='noreferrer';}
+      else{anchor.removeAttribute('target');anchor.removeAttribute('rel');}
+      if(label==='Football') anchor.classList.add('active');
+      else anchor.classList.remove('active');
+    });
+
+    const footerByLabel=new Map();
+    footerGroups.forEach((group)=>{
+      (group.links||[]).forEach((link)=>footerByLabel.set(link.label,link));
+    });
+    document.querySelectorAll('.ft-ul a').forEach((anchor)=>{
+      const label=(anchor.textContent||'').trim();
+      const link=footerByLabel.get(label);
+      if(!link) return;
+      anchor.href=link.href||'#';
+      if(link.external){anchor.target='_blank';anchor.rel='noreferrer';}
+      else{anchor.removeAttribute('target');anchor.removeAttribute('rel');}
+    });
+
+    const socialByLabel=new Map(topLinks.filter((link)=>link.external).map((link)=>[link.label,link]));
+    document.querySelectorAll('.socbtn').forEach((anchor)=>{
+      const label=(anchor.textContent||'').trim();
+      const link=socialByLabel.get(label);
+      if(!link) return;
+      anchor.href=link.href||'#';
+      anchor.target='_blank';
+      anchor.rel='noreferrer';
+    });
+  }catch(error){
+    console.warn('Failed to apply shared site links',error);
+  }
+}
+
+async function loadArticles(){
+  const articles=await fetchArticlesFromCandidates();
+  allArticles=articles;
+  if(!allArticles.length){
+    renderArticlesFallback('Latest articles unavailable right now.');
+    return;
+  }
+  renderArticles(allArticles);
+}
+async function loadMatches(){clearInterval(timer);const list=document.getElementById('match-list');try{const res=await fetch(API_URL,{cache:'no-store'});if(!res.ok)throw new Error(res.status);const data=await res.json();const arr=Array.isArray(data)?data:(data.matches||[]);if(!arr.length){list.innerHTML='<p class="ev-loading">No upcoming matches found.</p>';return}allMatches=sortMatches(arr);list.innerHTML='';allMatches.forEach(m=>list.appendChild(card(m)));tick();timer=setInterval(tick,1000)}catch(e){console.error(e);list.innerHTML='<p class="ev-loading">Error loading matches.</p>'}}
+document.addEventListener('DOMContentLoaded',()=>{pushAds();applySiteLinks();loadMatches();loadArticles()});
+</script>
+
+<div style="position:fixed;top:0;left:0;width:100%;height:1px;overflow:hidden;visibility:hidden;z-index:9999;">
+<script id="_waukox">var _wau = _wau || []; _wau.push(["dynamic", "1qzxz258so", "kox", "c4302bffffff", "small"]);</script>
+<script async src="https://waust.at/d.js"></script>
+</div>
+
+<div style="position:fixed;top:0;left:0;width:100%;height:1px;overflow:hidden;visibility:hidden;z-index:9999;">
+<script type="text/javascript" src="https://widget.supercounters.com/ssl/online_i.js"></script>
+<script type="text/javascript">sc_online_i(1714446,"ffffff","ffffff");</script>
+<noscript><a href="https://www.supercounters.com/" style="visibility:hidden;">free online counter</a></noscript>
+</div>
+
+</body>
+</html>
